@@ -1,0 +1,55 @@
+{
+    "dataset_folder": "../../Data_preparation/DATA_CODE_RPG",
+    "res_dir": "./Tunisie2/results_9RPGclasses2",
+    "num_workers": 8,
+    "rdm_seed": 1,
+    "device": "cpu",
+    "display_step": 50,
+    "preload": true,
+    "kfold": 5,
+    "epochs": 100,
+    "batch_size": 28,
+    "lr": 0.001,
+    "gamma": 1,
+    "npixel": 64,
+    "input_dim": 10,
+    "mlp1": [
+        10,
+        32,
+        64
+    ],
+    "pooling": "mean_std",
+    "mlp2": [
+        132,
+        128
+    ],
+    "geomfeat": 1,
+    "n_head": 16,
+    "d_k": 8,
+    "mlp3": [
+        256,
+        128
+    ],
+    "T": 1000,
+    "positions": "bespoke",
+    "lms": 24,
+    "dropout": 0,
+    "d_model": 256,
+    "num_classes": 9,
+    "mlp4": [
+        128,
+        64,
+        32,
+        20
+    ],
+    "tae": false,
+    "gru": false,
+    "hidden_dim": 156,
+    "tcnn": false,
+    "nker": [
+        32,
+        32,
+        128
+    ],
+    "N_params": 143124
+}
