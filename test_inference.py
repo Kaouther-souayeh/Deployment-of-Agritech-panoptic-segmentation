@@ -3,7 +3,7 @@ import numpy as np
 from Inference_CULT import predict
 
 
-def test_folder_pretrained_weights():
+def test_folde_pretrained_weights():
     folder_name=os.path.join("PSE-LTAE-pre-trained-weights")
     assert os.path.exists(folder_name), f"Folder '{folder_name}' does not exist."
     
