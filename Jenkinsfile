@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.9-slim-buster'
-        }
-    }
+    agent any
     stages {
         stage('Install dependencies') {
             steps {
