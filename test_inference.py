@@ -23,8 +23,8 @@ def test_folder_Data_preparation():
 #class MockLoader:
    # def __iter__(self):
    #     return iter([(np.array([1]), np.array([2]), 'id_1'), (np.array([3]), np.array([4]), 'id_2')])
-    def __len__(self):
-        return 2
+   # def __len__(self):
+      #  return 2
 
 #def test_predict(tmpdir):
     # Create a temporary directory for the output file
