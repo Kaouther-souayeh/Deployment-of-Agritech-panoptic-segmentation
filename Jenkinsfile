@@ -1,20 +1,27 @@
 pipeline {
-    agent any
-    
+    agent {
+        docker {
+            image 'python:3.9-slim-buster'
+        }
+    }
     stages {
-        stage('Checkout') {
+        stage('Install dependencies') {
             steps {
-                checkout scm
+                sh 'pip install -Ur requirements.txt'
             }
         }
-        stage('Test') {
+        stage('Run tests') {
             steps {
-                sh 'pip install -r requirements.txt'
+                sh 'pip install pytest'
                 sh 'pytest test_Data_preparation.py'
-                 
             }
-    
-        
+        }
     }
 }
-}
+
+
+
+
+
+
+
