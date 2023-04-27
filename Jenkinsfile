@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.7'
-            args '-u root:sudo'
-        }
-    }
+    agent any
     stages {
         stage('Install dependencies') {
             steps {
