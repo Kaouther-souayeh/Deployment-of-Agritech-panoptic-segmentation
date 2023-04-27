@@ -1,8 +1,9 @@
 pipeline {
-    agent any
-    tools{
+    pipeline {
+    agent {
         docker {
-            image 'python:3.9-slim-buster'
+            image 'python:3.7'
+            args '-u root:sudo'
         }
     }
     stages {
@@ -18,4 +19,5 @@ pipeline {
             }
         }
     }
+}
 }
