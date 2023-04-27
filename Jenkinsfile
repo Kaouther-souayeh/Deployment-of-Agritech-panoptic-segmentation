@@ -1,5 +1,6 @@
 pipeline {
-    agent {
+    agent any
+    tools{
         docker {
             image 'python:3.9-slim-buster'
         }
