@@ -13,7 +13,7 @@ from dataset import PixelSetData
 
 
 def prepare_model_and_loader(config):
-    mean_std = pkl.load(open('S2-2021-T32SNE-meanstd.pkl', 'rb'))
+    mean_std = pkl.load(open('S2-2017-T31TFM-meanstd.pkl', 'rb'))
     extra = 'geomfeat' if config['geomfeat'] else None
     dt = PixelSetData(config['dataset_folder'], labels='label_44class', npixel=config['npixel'],
                       sub_classes=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17],
