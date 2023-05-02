@@ -78,17 +78,17 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     # Set-up parameters
-    parser.add_argument('--dataset_folder', default='./results_saved', type=str,
+    parser.add_argument('--dataset_folder', default='/usr/src/app/BindMounting/Input/', type=str,
                         help='Path to the folder where the results are saved.')
-    parser.add_argument('--weight_dir', default='', type=str,
+    parser.add_argument('--weight_dir', default='/usr/src/app/weights', type=str,
                         help='Path to the folder containing the model weights')
     parser.add_argument('--fold', default='all', type=str,
                         help='Specify whether to load the weight sets of al folds (all) or '
                              'only load the weight of a specific fold by indicating its number')
-    parser.add_argument('--output_dir', default='./output_tun',
+    parser.add_argument('--output_dir', default='/usr/src/app/BindMounting/Output',
                         help='Path to the folder where the predictions should be stored')
     parser.add_argument('--num_workers', default=8, type=int, help='Number of data loading workers')
-    parser.add_argument('--device', default='cuda', type=str,
+    parser.add_argument('--device', default='cpu', type=str,
                         help='Name of device to use for tensor computations (cuda/cpu)')
     parser.add_argument('--display_step', default=5, type=int,
                         help='Interval in batches between display of training metrics')
