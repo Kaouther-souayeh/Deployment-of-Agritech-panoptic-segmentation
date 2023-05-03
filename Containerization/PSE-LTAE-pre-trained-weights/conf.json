@@ -1,0 +1,55 @@
+{
+    "dataset_folder": "./DATA/S2-2017-T31TFM-PixelSet/",
+    "res_dir": "/home/qt/saintefv/scratch/EXP_RESULTS/LTAErepo/ltae2",
+    "num_workers": 0,
+    "rdm_seed": 1,
+    "device": "cuda",
+    "display_step": 50,
+    "preload": true,
+    "kfold": 5,
+    "epochs": 100,
+    "batch_size": 128,
+    "lr": 0.001,
+    "gamma": 1,
+    "npixel": 64,
+    "input_dim": 10,
+    "mlp1": [
+        10,
+        32,
+        64
+    ],
+    "pooling": "mean_std",
+    "mlp2": [
+        132,
+        128
+    ],
+    "geomfeat": 1,
+    "n_head": 16,
+    "d_k": 8,
+    "mlp3": [
+        256,
+        128
+    ],
+    "T": 1000,
+    "positions": "bespoke",
+    "lms": 24,
+    "dropout": 0.2,
+    "d_model": 256,
+    "num_classes": 20,
+    "mlp4": [
+        128,
+        64,
+        32,
+        20
+    ],
+    "tae": false,
+    "gru": false,
+    "hidden_dim": 156,
+    "tcnn": false,
+    "nker": [
+        32,
+        32,
+        128
+    ],
+    "N_params": 143124
+}
