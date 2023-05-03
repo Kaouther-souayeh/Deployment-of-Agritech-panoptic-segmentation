@@ -33,7 +33,7 @@ jobs:
       with:
         image: kaouthersouayeh/panoptic_images
         tags: v0.01
-        registry: docker.io
+        registry: registry-1.docker.io
         dockerfile: Containerization/Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
