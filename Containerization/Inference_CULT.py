@@ -80,7 +80,7 @@ if __name__ == '__main__':
     # Set-up parameters
     parser.add_argument('--dataset_folder', default='/usr/src/app/BindMounting/Input/', type=str,
                         help='Path to the folder where the results are saved.')
-    parser.add_argument('--weight_dir', default='/usr/src/app/PSE-LTAE-pre-trained-weights', type=str,
+    parser.add_argument('--weight_dir', default='/usr/src/app/wEIGHTS_CULT', type=str,
                         help='Path to the folder containing the model weights')
     parser.add_argument('--fold', default='all', type=str,
                         help='Specify whether to load the weight sets of al folds (all) or '
