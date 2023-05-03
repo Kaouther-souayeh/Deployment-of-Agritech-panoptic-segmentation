@@ -13,7 +13,7 @@ from dataset import PixelSetData
 
 
 def prepare_model_and_loader(config):
-    mean_std = pkl.load(open('S2-2021-T32SNE-meanstd.pkl', 'rb'))
+    mean_std = pkl.load(open('S2-2017-T31TFM-meanstd.pkl', 'rb'))
     extra = 'geomfeat' if config['geomfeat'] else None
     dt = PixelSetData(config['dataset_folder'], labels='label_44class', npixel=config['npixel'],
                       sub_classes=[1,3,4,11,20,21,23,25,28],
@@ -50,8 +50,8 @@ def predict(model, loader, config):
 
     for (x, y, ids) in tqdm(loader):
         y_true = (list(map(int, y)))
+        #ids = list(ids)
         ids = list(ids)
-
         x = recursive_todevice(x, device)
         with torch.no_grad():
             prediction = model(x)
@@ -59,7 +59,9 @@ def predict(model, loader, config):
 
         record.append(np.stack([ids, y_true, y_p], axis=1))
 
+
     record = np.concatenate(record, axis=0)
+    
 
     os.makedirs(config['output_dir'], exist_ok=True)
     np.save(os.path.join(config['output_dir'], 'Predictions_id_ytrue_y_pred5.npy'), record)
@@ -78,17 +80,17 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     # Set-up parameters
-    parser.add_argument('--dataset_folder', default='./results_saved', type=str,
+    parser.add_argument('--dataset_folder', default='/home/pc/Documents/bilel/deployment-of-agritech-panoptic-segmentation/S2-2017-T31TFM-PixelSet-TOY', type=str,
                         help='Path to the folder where the results are saved.')
-    parser.add_argument('--weight_dir', default='', type=str,
+    parser.add_argument('--weight_dir', default='/home/pc/Documents/bilel/deployment-of-agritech-panoptic-segmentation/wEIGHTS_CULT', type=str,
                         help='Path to the folder containing the model weights')
     parser.add_argument('--fold', default='all', type=str,
                         help='Specify whether to load the weight sets of al folds (all) or '
                              'only load the weight of a specific fold by indicating its number')
-    parser.add_argument('--output_dir', default='./output_tun',
+    parser.add_argument('--output_dir', default='/home/pc/Documents/bilel/deployment-of-agritech-panoptic-segmentation/out2',
                         help='Path to the folder where the predictions should be stored')
     parser.add_argument('--num_workers', default=8, type=int, help='Number of data loading workers')
-    parser.add_argument('--device', default='cuda', type=str,
+    parser.add_argument('--device', default='cpu', type=str,
                         help='Name of device to use for tensor computations (cuda/cpu)')
     parser.add_argument('--display_step', default=50, type=int,
                         help='Interval in batches between display of training metrics')

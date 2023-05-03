@@ -44,7 +44,7 @@ def evaluation(model, criterion, loader, device, config, mode='test'):
         return metrics, confusion_matrix(y_true, y_pred, labels=list(range(config['num_classes'])))
 
 def prepare_model_and_loader(config):
-    mean_std = mean_std = pkl.load(open('S2-2021-T32SNE-meanstd.pkl', 'rb'))
+    mean_std = mean_std = pkl.load(open('S2-2017-T31TFM-meanstd.pkl', 'rb'))
     extra = 'geomfeat' if config['geomfeat'] else None
     dt = PixelSetData(config['dataset_folder'], labels='label_44class', npixel=config['npixel'],
                       sub_classes=[1,3,4,11,20,21,23,25,28],
@@ -139,9 +139,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     # Set-up parameters
-    parser.add_argument('--dataset_folder', default='./results_saved', type=str,
+    parser.add_argument('--dataset_folder', default='/home/pc/Documents/bilel/deployment-of-agritech-panoptic-segmentation/S2-2017-T31TFM-PixelSet-TOY', type=str,
                         help='Path to the folder where the results are saved.')
-    parser.add_argument('--weight_dir', default='', type=str,
+    parser.add_argument('--weight_dir', default='/home/pc/Documents/bilel/deployment-of-agritech-panoptic-segmentation/wEIGHTS_CULT', type=str,
                         help='Path to the folder containing the model weights')
     parser.add_argument('--fold', default='all', type=str,
                         help='Specify whether to load the weight sets of al folds (all) or '
@@ -149,7 +149,7 @@ if __name__ == '__main__':
     parser.add_argument('--output_dir', default='./output',
                         help='Path to the folder where the predictions should be stored')
     parser.add_argument('--num_workers', default=8, type=int, help='Number of data loading workers')
-    parser.add_argument('--device', default='cuda', type=str,
+    parser.add_argument('--device', default='cpu', type=str,
                         help='Name of device to use for tensor computations (cuda/cpu)')
     parser.add_argument('--display_step', default=5, type=int,
                         help='Interval in batches between display of training metrics')
