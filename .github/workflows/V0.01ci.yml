@@ -2,7 +2,6 @@
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
 name: Python app
-import os
 on:
   push:
     branches: [ "V0.01" ]
@@ -35,6 +34,6 @@ jobs:
         image: kaouthersouayeh/panoptic_images
         tags: v0.01
         registry: docker.io
-        dockerfile: os.path.join("Containerization", "Dockerfile")
+        dockerfile: Containerization/Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
