@@ -2,10 +2,8 @@ name: AzureBuildDockerImagePushACR
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ "V0.01" ]
-  pull_request:
-    branches: [ "master" ]
+    branches:
+      - V0.01
 
 
 jobs:
