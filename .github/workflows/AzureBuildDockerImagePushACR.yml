@@ -1,4 +1,4 @@
-name: Build Linux Container Image and Push to ACR
+name: AzureBuildDockerImagePushACR
 
 on:
   workflow_dispatch:
