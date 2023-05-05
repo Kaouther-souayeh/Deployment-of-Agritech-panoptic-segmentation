@@ -2,8 +2,7 @@ name: AzureBuildDockerImagePushACR
 
 on:
   workflow_dispatch:
-    branches:
-      - V0.01
+    
 
 
 jobs:
