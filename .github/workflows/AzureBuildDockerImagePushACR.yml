@@ -23,6 +23,7 @@ jobs:
           registry: ${{ secrets.REGISTRY }}
           repository: ${{ secrets.REPOSITORY }}
           image:  panoptic-segmentation-v1
+          folder: Containerization
           tag: ${{ github.sha }}
       - name: Azure login
         id: login
