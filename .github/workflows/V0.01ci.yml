@@ -1,6 +1,10 @@
 name: Python app
 on:
-  
+  push:
+    branches: [ "V0.01" ]
+  pull_request:
+    branches: [ "master" ] 
+    
 jobs:
   test:
     runs-on: ubuntu-latest    #the server that github available for the workflow
@@ -35,4 +39,19 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
   
- 
+  buildToACR:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: Containerization
+    steps:
+    - uses: actions/checkout@v2
+    - uses: azure/docker-login@v1
+      with:
+        login-server: doccontainers.azurecr.io
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    - run: |
+        docker build . -t doccontainers.azurecr.io/myapp:${{ github.sha }}
+        docker push doccontainers.azurecr.io/myapp:${{ github.sha }}
