@@ -1,0 +1,107 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: input-volume-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+      
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: panoptic-segmentation-v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: panoptic-segmentation-v1
+  template:
+    metadata:
+      labels:
+        app: panoptic-segmentation-v1
+    spec:
+      nodeSelector:
+        environment: prod
+      containers:
+      - name: panoptic-segmentation-v1
+        image: doccontainers.azurecr.io/myapp:e999a428e65f499f9987da02de8c50fe4f1699d8
+        volumeMounts:
+        - name: input-volume
+          mountPath: /input
+        env:
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "yes"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+      volumes:
+        - name: input-volume
+          persistentVolumeClaim:
+            claimName: input-volume-claim 
+        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: panoptic-segmentation-v1
+spec:
+  ports:
+  - port: 6379
+  selector:
+    app: panoptic-segmentation-v1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: panoptic-segmentation-v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: panoptic-segmentation-v2
+  template:
+    metadata:
+      labels:
+        app: panoptic-segmentation-v2
+    spec:
+      nodeSelector:
+        environment: prod
+      containers:
+      - name: panoptic-segmentation-v2
+        image: doccontainers.azurecr.io/myapp:60352bb16b84a4262d368bfe12365d57a56c4d68
+        volumeMounts:
+        - name: input-volume
+          mountPath: /input
+        env:
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "yes"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+      volumes:
+        - name: input-volume
+          persistentVolumeClaim:
+            claimName: input-volume-claim      
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: panoptic-segmentation-v2
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: panoptic-segmentation-v2
