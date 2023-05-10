@@ -41,6 +41,7 @@ jobs:
   
   buildToAKS:
     runs-on: ubuntu-latest
+    needs: test
     steps:
       - name: Checkout source code 
         uses: actions/checkout@v3
