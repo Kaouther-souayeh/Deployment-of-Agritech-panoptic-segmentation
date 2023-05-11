@@ -8,7 +8,6 @@ on:
 jobs:
   buildToACR:
     runs-on: ubuntu-latest
-    needs: test
     defaults:
       run:
         shell: bash
