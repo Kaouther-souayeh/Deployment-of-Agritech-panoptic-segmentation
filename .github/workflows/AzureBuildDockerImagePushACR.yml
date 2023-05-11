@@ -23,7 +23,7 @@ jobs:
           repository: ${{ secrets.REPOSITORY }}
           image:  myapp
           folder: Containerization
-          branch: V0.01
+          branch: master
           tag: ${{ github.sha }}
       - name: Azure login
         id: login
