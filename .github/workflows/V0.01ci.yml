@@ -1,9 +1,6 @@
 name: Python application
 on:
-  push:
-    branches: [ "V0.01" ]
-  pull_request:
-    branches: [ "master" ] 
+  
 
 jobs:
   test:
@@ -24,7 +21,7 @@ jobs:
         run: |
           pytest
 
-  build-image:
+  buildToDockerHub:
     runs-on: ubuntu-latest
     needs: test
     steps:

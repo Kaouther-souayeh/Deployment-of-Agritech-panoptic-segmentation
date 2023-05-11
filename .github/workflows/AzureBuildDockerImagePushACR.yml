@@ -1,8 +1,10 @@
 name: AzureBuildDockerImagePushACR
 
 on:
-  
-
+  push:
+    branches: [ "V0.01" ]
+  pull_request:
+    branches: [ "master" ] 
 
 jobs:
    buildToAKS:
@@ -19,7 +21,7 @@ jobs:
           tenant: ${{ secrets.AZURE_TENANT_ID }}
           registry: ${{ secrets.REGISTRY }}
           repository: ${{ secrets.REPOSITORY }}
-          image:  panoptic-segmentation-v1
+          image:  doccontainers.azurecr.io/myapp
           folder: Containerization
           branch: V0.01
           tag: ${{ github.sha }}
@@ -44,6 +46,6 @@ jobs:
           namespace: 'default'
           manifests: |
              AKS.yaml
-          images: '${{ secrets.registry }}.azurecr.io/${{ secrets.repository }}/panoptic-segmentation-v1:${{ github.sha }}'
+          images: '${{ secrets.registry }}.azurecr.io/${{ secrets.repository }}/myapp:${{ github.sha }}'
           pull-images: false 
   
