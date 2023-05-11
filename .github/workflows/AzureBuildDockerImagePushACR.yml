@@ -1,5 +1,4 @@
 name: AzureBuildDockerImagePushACR
-
 on:
   push:
     branches: [ "V0.01" ]
