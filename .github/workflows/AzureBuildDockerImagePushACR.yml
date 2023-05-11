@@ -22,7 +22,7 @@ jobs:
           registry: ${{ secrets.REGISTRY }}
           repository: ${{ secrets.REPOSITORY }}
           image:  myapp
-          folder: Containerization
+          folder: ./Containerization
           branch: V0.01
           tag: ${{ github.sha }}
       - name: Azure login
