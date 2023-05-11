@@ -2,16 +2,26 @@ name: AzureBuildDockerImagePushACR
 
 
 on:
-  push:
-    branches: [ "V0.01" ]
-  pull_request:
-    branches: [ "master" ] 
+ 
 jobs:
    buildToAKS:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code 
         uses: actions/checkout@v3
+      - name: ACR build
+        id: build-push-acr
+        uses: azure/acr-build@v1
+        with:
+          service_principal: ${{ secrets.AZURE_CLIENT_ID }}
+          service_principal_password: ${{ secrets.SERVICE_PRINCIPAL_PASSWORD }}
+          tenant: ${{ secrets.AZURE_TENANT_ID }}
+          registry: ${{ secrets.REGISTRY }}
+          repository: ${{ secrets.REPOSITORY }}
+          image:  myapp
+          folder: Containerization
+          branch: V0.01
+          tag: ${{ github.sha }}
       - name: Azure login
         id: login
         uses: azure/login@v1.4.3
