@@ -21,7 +21,7 @@ jobs:
           tenant: ${{ secrets.AZURE_TENANT_ID }}
           registry: ${{ secrets.REGISTRY }}
           repository: ${{ secrets.REPOSITORY }}
-          image:  doccontainers.azurecr.io/myapp
+          image:  myapp
           folder: Containerization
           branch: V0.01
           tag: ${{ github.sha }}
