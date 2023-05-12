@@ -30,15 +30,19 @@ spec:
         # image: houssemdocker/webapp:111
         image: __DOCKER_REPOSITORY__/__IMAGE_NAME__:__IMAGE_TAG__
         # image: __ACR_NAME__.azurecr.io/__DOCKER_IMAGE__:__TAG__
-        ports:
-        - containerPort: 80
+        volumeMounts:
+        - name: input-volume
+          mountPath: /input
+        env:
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "yes"
         resources:
-          limits:
-            cpu: 300m
-            memory: "100Mi"
           requests:
             cpu: 100m
-            memory: "50Mi"
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
       volumes:
         - name: input-volume
           persistentVolumeClaim:
