@@ -24,6 +24,8 @@ spec:
       labels:
         app: panoptic
     spec:
+      imagePullSecrets:
+      - name: my-registry-creds
       containers:
       - name: panoptic
         # image: demoaks0acr.azurecr.io/web-app:1.3
