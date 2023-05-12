@@ -39,7 +39,7 @@ spec:
           requests:
             cpu: 100m
             memory: "50Mi"
-        volumes:
+      volumes:
         - name: input-volume
           persistentVolumeClaim:
             claimName: input-volume-claim 
