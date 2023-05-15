@@ -43,6 +43,7 @@ jobs:
 
   build-deploy-aks:
     runs-on: ubuntu-latest
+    needs: test
     env:
       DOCKER_REPOSITORY: kaouthersouayeh # name of Docker Hub ID
       IMAGE_NAME: panoptic_images
