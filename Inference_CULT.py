@@ -13,7 +13,7 @@ from dataset import PixelSetData
 
 
 def prepare_model_and_loader(config):
-    mean_std = pkl.load(open('S2-2017-T31TFM-meanstd.pkl', 'rb'))
+    mean_std = pkl.load(open(config['dataset_folder'] + 'S2-2017-T31TFM-meanstd.pkl', 'rb'))
     extra = 'geomfeat' if config['geomfeat'] else None
     dt = PixelSetData(config['dataset_folder'], labels='label_44class', npixel=config['npixel'],
                       sub_classes=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17],
@@ -72,20 +72,21 @@ def main(config):
     predict(model, loader, config)
     print('Results stored in directory {}'.format(config['output_dir']))
 
+current_directory=os.getcwd()
 
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
 
     # Set-up parameters
-    parser.add_argument('--dataset_folder', default='/usr/src/app/BindMounting/Input/', type=str,
+    parser.add_argument('--dataset_folder', default=current_directory+'/BindMounting/Input/', type=str,
                         help='Path to the folder where the results are saved.')
-    parser.add_argument('--weight_dir', default='/usr/src/app/weights', type=str,
+    parser.add_argument('--weight_dir', default=current_directory+'/Containerization/wEIGHTS_CULT', type=str,
                         help='Path to the folder containing the model weights')
     parser.add_argument('--fold', default='all', type=str,
                         help='Specify whether to load the weight sets of al folds (all) or '
                              'only load the weight of a specific fold by indicating its number')
-    parser.add_argument('--output_dir', default='/usr/src/app/BindMounting/Output',
+    parser.add_argument('--output_dir', default=current_directory+'/BindMounting/Output',
                         help='Path to the folder where the predictions should be stored')
     parser.add_argument('--num_workers', default=8, type=int, help='Number of data loading workers')
     parser.add_argument('--device', default='cpu', type=str,
