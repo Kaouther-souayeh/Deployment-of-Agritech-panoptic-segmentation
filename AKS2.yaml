@@ -18,7 +18,7 @@ spec:
         image: __DOCKER_REPOSITORY__/__IMAGE_NAME__:__IMAGE_TAG__
         volumeMounts:
         - name: input-volume
-          mountPath: /usr/src/app/BindMounting/Input
+          mountPath: /Input
         env:
         - name: ALLOW_EMPTY_PASSWORD
           value: "yes"
