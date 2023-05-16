@@ -1,15 +1,3 @@
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: input-volume-claim
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-
----      
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -26,12 +14,11 @@ spec:
     spec:
       containers:
       - name: panoptic
-       
+        #image : kaouthersouayeh/panoptic_images:66
         image: __DOCKER_REPOSITORY__/__IMAGE_NAME__:__IMAGE_TAG__
-        
         volumeMounts:
         - name: input-volume
-          mountPath: /usr/src/app/BindMounting/Input/
+          mountPath: /usr/src/app/BindMounting/Input
         env:
         - name: ALLOW_EMPTY_PASSWORD
           value: "yes"
@@ -44,11 +31,9 @@ spec:
             memory: 256Mi
       volumes:
         - name: input-volume
-          hostPath:
-            path: ./BindMounting/Input/
-            type: File
-          persistentVolumeClaim:
-            claimName: input-volume-claim 
+          configMap:
+             name: my-config
+          
 ---
 kind: Service
 apiVersion: v1
