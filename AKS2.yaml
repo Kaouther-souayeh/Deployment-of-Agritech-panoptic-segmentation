@@ -1,3 +1,15 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: input-volume-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---      
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -31,8 +43,10 @@ spec:
             memory: 256Mi
       volumes:
         - name: input-volume
-          configMap:
-             name: my-config
+          persistentVolumeClaim:
+            claimName: input-volume-claim
+         # configMap:
+          #   name: my-config
           
 ---
 kind: Service
