@@ -54,29 +54,6 @@ resource "azurerm_key_vault_secret" "example" {
   ]
 }
 
-provider "kubernetes" {
-  config_path = "~/.kube/config"  # Path to your kubeconfig file
-}
-
-locals {
-  folder_path = ""
-}
-
-data "local_file" "folder_contents" {
-  filename = local.folder_path
-  
-}
-
-resource "kubernetes_config_map" "my_config_mapnew" {
-  metadata {
-    name = "my-confignew"
-  }
-
-  data = {
-    folder_contents = data.local_file.folder_contents.content
-  }
-}
-
 module "aks" {
   source = "./modules/aks"
   service_principal_name = var.service_principal_name
