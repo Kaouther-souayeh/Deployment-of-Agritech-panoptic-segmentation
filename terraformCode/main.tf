@@ -59,7 +59,7 @@ provider "kubernetes" {
 }
 
 locals {
-  folder_path = "/home/pc/Documents/BindMounting/Input/S2-2017-T31TFM-meanstd.pkl"
+  folder_path = ""
 }
 
 data "local_file" "folder_contents" {
