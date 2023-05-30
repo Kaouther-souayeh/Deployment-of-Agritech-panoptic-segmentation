@@ -19,7 +19,7 @@ module "ServicePrincipal" {
 }
 
 
-resource "azurerm_role_assignment" "rolePanoptic" {
+resource "azurerm_role_assignment" "rolePanoptic2" {
 
   scope                = "/subscriptions/e11d97b1-1116-4846-adbe-62819df517db/"
   role_definition_name = "Contributor"
@@ -54,28 +54,6 @@ resource "azurerm_key_vault_secret" "example" {
   ]
 }
 
-provider "kubernetes" {
-  config_path = "~/.kube/config"  # Path to your kubeconfig file
-}
-
-locals {
-  folder_path = "/home/pc/Documents/BindMounting/Input/S2-2017-T31TFM-meanstd.pkl"
-}
-
-data "local_file" "folder_contents" {
-  filename = local.folder_path
-  
-}
-
-resource "kubernetes_config_map" "my_config_mapnew" {
-  metadata {
-    name = "my-confignew"
-  }
-
-  data = {
-    folder_contents = data.local_file.folder_contents.content
-  }
-}
 
 module "aks" {
   source = "./modules/aks"

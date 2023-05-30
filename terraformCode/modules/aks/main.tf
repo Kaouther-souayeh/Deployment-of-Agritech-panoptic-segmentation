@@ -38,15 +38,5 @@ resource "azurerm_kubernetes_cluster" "aks-cluster" {
     client_id = var.client_id
     client_secret = var.client_secret
   }
-
-
-
-  linux_profile {
-    admin_username = "ubuntu"
-    ssh_key {
-        key_data = file(var.ssh_public_key)
-    }
-  }
-
     
   }
